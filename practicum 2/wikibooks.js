@@ -1,6 +1,8 @@
+var config = require('./config.json');
 var express = require('express');
 var app = express();
-var port = process.env.PORT || 8080;
+
+app.set('PORT', config.webPort);
 
 app.get('/', function(request, response) {
  response.send('Hello Avans!');
@@ -34,10 +36,21 @@ app.post('/', function(request, response) {
 app.put('/', function(request, response) {
  response.send('Hello Avans, PUT request received!');
 })
+
+
+app.all('*', function(request, response, next) {
+ console.log(request.method + " " + request.url);
+ next();
+})
+
+app.use('/api/v1', require('./routes/routes_api_v1'));
+
 app.all('*', function(request, response) {
  response.status(404);
  response.send('404 - Not found');
 })
+
+var port = process.env.PORT || app.get('PORT');
 app.listen(port, function() {
  console.log('Server app is listening on port' + port);
 })
