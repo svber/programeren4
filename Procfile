@@ -1,1 +1,1 @@
-web: node ./les1/my random user.js
+web: node ./practicum 1/les1/my random user.js
