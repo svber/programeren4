@@ -10,6 +10,6 @@ router.get('*', function(request, response) {
 });
 router.get('/api/v2/recipes', function(request,response){
 	response.json({recipes})
-	var recipes = require('.././recepies.js');
+	var recipes = require('.//recepies.js');
 });
 module.exports = router;
